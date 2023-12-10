@@ -7,11 +7,13 @@ class CreateMentees < ActiveRecord::Migration[7.0]
       t.string :location
       t.string :company
       t.string :job_title
-      t.string :domain
       t.text :profile_img
       t.text :introduction
-      t.references :skill, null: false, foreign_key: true
-
+      t.text :linkedin_url
+      t.text :behance_url
+      t.text :instagram_url
+      t.text :portfolio_url
+      t.text :resume
       t.timestamps
     end
   end
