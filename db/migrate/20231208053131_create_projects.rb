@@ -6,8 +6,6 @@ class CreateProjects < ActiveRecord::Migration[7.0]
       t.text :image_url
       t.date :starting_date
       t.integer :duration
-      t.references :skill, null: false, foreign_key: true
-
       t.timestamps
     end
   end
