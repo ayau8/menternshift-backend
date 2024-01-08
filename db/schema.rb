@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_10_065850) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_08_120822) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "experiences", force: :cascade do |t|
@@ -20,113 +21,94 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_10_065850) do
     t.text "description"
     t.date "start_date"
     t.date "end_date"
-    t.bigint "mentor_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mentor_id"], name: "index_experiences_on_mentor_id"
+    t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
   create_table "expertises", force: :cascade do |t|
     t.string "domain"
-    t.integer "years_of_experiences"
-    t.bigint "mentee_id", null: false
-    t.bigint "mentor_id", null: false
+    t.integer "year_of_experience"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mentee_id"], name: "index_expertises_on_mentee_id"
-    t.index ["mentor_id"], name: "index_expertises_on_mentor_id"
+    t.index ["user_id"], name: "index_expertises_on_user_id"
   end
 
-  create_table "languages", force: :cascade do |t|
-    t.string "name"
-    t.bigint "mentee_id", null: false
-    t.bigint "mentor_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["mentee_id"], name: "index_languages_on_mentee_id"
-    t.index ["mentor_id"], name: "index_languages_on_mentor_id"
-  end
-
-  create_table "mentees", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "user_name"
-    t.string "location"
-    t.string "company"
-    t.string "job_title"
-    t.text "profile_img"
-    t.text "introduction"
-    t.text "linkedin_url"
-    t.text "behance_url"
-    t.text "instagram_url"
-    t.text "portfolio_url"
-    t.text "resume"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "mentors", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "user_name"
-    t.string "location"
-    t.text "profile_img"
-    t.text "introduction"
-    t.string "guidance_from"
-    t.text "linkedin_url"
-    t.text "behance_url"
-    t.text "instagram_url"
-    t.text "portfolio_url"
-    t.text "resume"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "mentorships", force: :cascade do |t|
-    t.bigint "mentee_id", null: false
-    t.bigint "mentor_id", null: false
+  create_table "project_areas", force: :cascade do |t|
+    t.string "design"
+    t.string "frontend"
+    t.string "backend"
+    t.string "devops"
+    t.string "qa"
+    t.string "proj_man"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mentee_id"], name: "index_mentorships_on_mentee_id"
-    t.index ["mentor_id"], name: "index_mentorships_on_mentor_id"
-    t.index ["project_id"], name: "index_mentorships_on_project_id"
-  end
-
-  create_table "project_skills", force: :cascade do |t|
-    t.string "name"
-    t.bigint "project_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_project_skills_on_project_id"
+    t.index ["project_id"], name: "index_project_areas_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.text "image_url"
-    t.date "starting_date"
+    t.date "start_date"
+    t.date "end_date"
     t.integer "duration"
+    t.string "progress"
+    t.text "skill", default: [], array: true
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "user_skills", force: :cascade do |t|
+  create_table "reviews", force: :cascade do |t|
     t.string "name"
-    t.bigint "mentee_id", null: false
+    t.date "date"
+    t.text "comment"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mentee_id"], name: "index_user_skills_on_mentee_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  add_foreign_key "experiences", "mentors"
-  add_foreign_key "expertises", "mentees"
-  add_foreign_key "expertises", "mentors"
-  add_foreign_key "languages", "mentees"
-  add_foreign_key "languages", "mentors"
-  add_foreign_key "mentorships", "mentees"
-  add_foreign_key "mentorships", "mentors"
-  add_foreign_key "mentorships", "projects"
-  add_foreign_key "project_skills", "projects"
-  add_foreign_key "user_skills", "mentees"
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "role"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "username"
+    t.string "location"
+    t.string "company"
+    t.string "job_title"
+    t.text "profile_img"
+    t.text "bio"
+    t.text "resume"
+    t.text "guidance", default: [], array: true
+    t.text "language", default: [], array: true
+    t.text "skill", default: [], array: true
+    t.string "isAvailable"
+    t.string "timezone"
+    t.hstore "social_platforms"
+    t.bigint "project_area_id", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["project_area_id"], name: "index_users_on_project_area_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "experiences", "users"
+  add_foreign_key "expertises", "users"
+  add_foreign_key "project_areas", "projects"
+  add_foreign_key "projects", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "users", "project_areas"
 end
