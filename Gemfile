@@ -51,3 +51,6 @@ group :development do
 end
 
 gem "devise", "~> 4.9"
+gem 'rubocop', '~> 1.58', require: false
+
+gem 'brakeman'
