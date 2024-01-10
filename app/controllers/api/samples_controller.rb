@@ -1,9 +1,9 @@
 class Api::SamplesController < ApplicationController
-    before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:show, :update]
     
     def index
         @users = User.all
-
+        
         render json: @users
     end
     
