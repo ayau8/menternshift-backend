@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :experiences
   has_many :expertises
+  has_many :projects
 end
