@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_032649) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_032944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
@@ -34,6 +34,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_032649) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_expertises_on_user_id"
+  end
+
+  create_table "project_areas", force: :cascade do |t|
+    t.string "design"
+    t.string "frontend"
+    t.string "backend"
+    t.string "devops"
+    t.string "qa"
+    t.string "proj_man"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_areas_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -91,6 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_032649) do
 
   add_foreign_key "experiences", "users"
   add_foreign_key "expertises", "users"
+  add_foreign_key "project_areas", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "reviews", "users"
 end
