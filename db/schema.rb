@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_032944) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_033330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
@@ -98,7 +98,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_032944) do
     t.string "isAvailable"
     t.string "timezone"
     t.hstore "social_platforms"
+    t.bigint "project_area_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["project_area_id"], name: "index_users_on_project_area_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -107,4 +109,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_032944) do
   add_foreign_key "project_areas", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "reviews", "users"
+  add_foreign_key "users", "project_areas"
 end
