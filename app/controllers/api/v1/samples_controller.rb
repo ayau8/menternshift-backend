@@ -1,4 +1,4 @@
-class Api::SamplesController < ApplicationController
+class Api::V1::SamplesController < ApplicationController
   before_action :set_user, only: [:show, :update]
   
   def index
