@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_033330) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_17_072518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
@@ -92,10 +92,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_033330) do
     t.string "job_title"
     t.text "profile_img"
     t.text "bio"
-    t.text "guidance", default: [], array: true
-    t.text "language", default: [], array: true
-    t.text "skill", default: [], array: true
-    t.string "isAvailable"
+    t.text "guidances", default: [], array: true
+    t.text "languages", default: [], array: true
+    t.text "skills", default: [], array: true
+    t.string "is_available"
     t.string "timezone"
     t.hstore "social_platforms"
     t.bigint "project_area_id", null: false
