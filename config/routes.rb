@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :samples, only: [:index, :show, :create, :update]
-  end 
+    namespace :v1 do
+      resources :samples, only: [:index, :show, :create, :update]
+    end 
+  end
 end
