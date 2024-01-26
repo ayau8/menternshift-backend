@@ -5,7 +5,7 @@ class Api::V1::SamplesController < ApplicationController
     users = User.all
     render json: users
   end
-
+  
   def show
     render json: @user
   end
@@ -34,6 +34,6 @@ class Api::V1::SamplesController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email)
+    params.require(:user).permit(:email, :role, :first_name, :middle_name, :last_name, :username, :location, :company, :job_title, :profile_img, :bio,: guidances, :languages, :skills, :is_available, :timezone, :social_platforms)
   end
 end
