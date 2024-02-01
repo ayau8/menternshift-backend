@@ -13,8 +13,8 @@ puts "Creating mentors"
 puts "--------------------------------------"
 
 #mentors
-alvin = User.new(
-  email: "ayaualvin@gmail.com",
+user = User.create!(
+  email: "menternshift@gmail.com",
   password: "123456",
   role: "mentor",
   first_name: "Alvin",
@@ -38,7 +38,7 @@ alvin = User.new(
     "Mandarin"
   ],
   skills: [],
-  is_available: "Y",
+  is_available: true,
   timezone: "Japan Standard Time (PST) UTC+09:00",
   social_platforms: {
     "LinkedIn" => "https://www.linkedin.com/in/alvin-yau/",
@@ -47,4 +47,4 @@ alvin = User.new(
     "Portfolio" => "",
   },
   )
-alvin.save!  
+
