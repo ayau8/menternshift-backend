@@ -13,7 +13,7 @@ puts "Creating mentors"
 puts "--------------------------------------"
 
 #mentors
-user = User.create!(
+User.create!(
   email: "menternshift@gmail.com",
   password: "123456",
   role: "mentor",
