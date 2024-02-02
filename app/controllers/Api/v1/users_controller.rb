@@ -2,7 +2,9 @@ class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show]
     
   def show
-    render json: (@user ? @user : { error: "User not found" }), status: (@user ? :ok : :not_found)
+    render json: 
+      @user ? @user : { error: "User not found" }, 
+      status: @user ? :ok : :not_found
   end
 
   private
