@@ -2,7 +2,7 @@ module Api
   module V1
     describe UsersController, type: :controller do
       context "#show" do
-        let!(:first_user) {User.create(
+        let!(:user) {User.create(
           email: "menternshift@gmail.com",
           password: "123456",
           role: "mentor",
@@ -37,12 +37,12 @@ module Api
         })}
         
         it "returns a specifc user" do
-          get :show, format: :json, params: { id: first_user.id }
+          get :show, format: :json, params: { id: user.id }
           expect(response.status).to eq(200)
           user_response = JSON.parse(response.body)
-          expect(user_response["first_name"]).to eq(first_user.first_name)
-          expect(user_response["location"]).to eq(first_user.location)
-          expect(user_response["guidances"]).to eq(first_user.guidances)
+          expect(user_response["first_name"]).to eq(user.first_name)
+          expect(user_response["location"]).to eq(user.location)
+          expect(user_response["guidances"]).to eq(user.guidances)
         end
 
         it "returns a 404 for missing user" do
