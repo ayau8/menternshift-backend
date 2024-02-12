@@ -53,4 +53,9 @@ end
 gem 'rubocop', '~> 1.58', require: false
 
 gem 'brakeman'
+
 gem "devise", "~> 4.9"
+
+gem 'factory_bot_rails'
+
+gem 'faker'
