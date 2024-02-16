@@ -3,6 +3,7 @@ puts "--------------------------------------"
 puts "Clearing DB"
 
 #Destroying the database
+Expertise.destroy_all
 User.destroy_all
 
 #Creating the users
@@ -13,7 +14,7 @@ puts "Creating mentors"
 puts "--------------------------------------"
 
 #mentors
-User.create!(
+ first_user = User.create!(
   email: "menternshift@gmail.com",
   password: "123456",
   role: "mentor",
@@ -48,3 +49,11 @@ User.create!(
   },
   )
 
+puts "Creating Expertise"
+puts "--------------------------------------"
+#Expertise
+Expertise.create!(
+  domain: "Product Design",
+  years_of_experience: 5,
+  user_id: first_user.id,
+)
