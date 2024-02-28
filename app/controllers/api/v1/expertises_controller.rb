@@ -47,4 +47,3 @@ class Api::V1::ExpertisesController < ApplicationController
     params.require(:expertise).permit(:domain, :years_of_experience)
   end  
 end
-
