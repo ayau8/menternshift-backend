@@ -1,6 +1,11 @@
 class Api::V1::ExpertisesController < ApplicationController
   before_action :set_expertise, only: [:show, :update, :destroy]
   
+  def index
+    @expertises = Expertise.where(user_id: params[:user_id])
+    render json: @expertises, status: :ok
+  end
+
   def show
     render json:
       @expertise ? @expertise : { error: "Expertise not found" },
@@ -15,7 +20,7 @@ class Api::V1::ExpertisesController < ApplicationController
   def create
     @user = User.find_by(id: params[:user_id])
     @expertise = Expertise.new(expertise_params)
-    @expertise.user = User.find_by(id: @user.id)
+    @expertise.user = @user
     if @expertise.save
       render json: { expertise: @expertise }, status: :created
     else
@@ -47,3 +52,4 @@ class Api::V1::ExpertisesController < ApplicationController
     params.require(:expertise).permit(:domain, :years_of_experience)
   end  
 end
+
