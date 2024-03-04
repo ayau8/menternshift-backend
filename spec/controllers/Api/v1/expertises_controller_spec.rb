@@ -16,12 +16,12 @@ RSpec.describe Api::V1::ExpertisesController, type: :controller do
     end
 
     context "when user's expertises do not exist" do
-      let(:expertise) { [] }
-      it "returns an empty array" do
+      let(:expertises) { [] }
+      it "returns an empty array with a 404" do
         get :index, format: :json, params: { user_id: user.id }
-        expect(response.status).to eq(200)
-        users_response = JSON.parse(response.body)
-        expect(users_response).to be_empty
+        expect(response.status).to eq(404)
+        error_response = JSON.parse(response.body)
+        expect(error_response["error"]).to eq("Expertises not found")
       end
     end
   end
