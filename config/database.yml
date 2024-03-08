@@ -21,9 +21,12 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
 
   # ADDED for Docker
-  host: postgresql
-  username: postgres
-  password: postgres
+  # host: postgresql
+  # username: postgres
+  # password: postgres
+  host: <%= ENV["DB_HOST"] || "" %>
+  password: <%= ENV["POSTGRES_PASSWORD"] || "" %>
+  username: <%= ENV["POSTGRES_USERNAME"] || "" %>
 
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
