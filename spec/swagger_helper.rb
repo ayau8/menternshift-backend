@@ -18,16 +18,16 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'API V1',
+        title: 'Menternshift API V1',
         version: 'v1'
       },
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
+          url: 'https://localhost:3000/',
           variables: {
             defaultHost: {
-              default: 'www.example.com'
+              default: 'localhost:3000'
             }
           }
         }
