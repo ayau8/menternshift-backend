@@ -40,7 +40,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
       it "returns associated expertises" do
         expect(users.last.expertises).not_to be_empty
-      expect(users.last.expertises.size).to eq(3)
+        expect(users.last.expertises.size).to eq(3)
       end
     end
 
@@ -58,27 +58,27 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     let(:user_params) { attributes_for(:user) }
     let(:invalid_user_params) { attributes_for(:user).merge(email: nil) }
     
-      context "when the parameters are valid" do
-        it "creates a user" do 
-          post :create, format: :json, params: { user: user_params }
-          expect(response.status).to eq(201)
-          user_response = JSON.parse(response.body)["user"]
-          expect(user_response["first_name"]).to eq(user_params[:first_name])
-          expect(user_response["location"]).to eq(user_params[:location])
-          expect(user_response["guidances"]).to eq(user_params[:guidances])
-        end
-      end
-
-      context "when the parameters are not valid" do
-        it "does not create a user" do 
-          post :create, format: :json, params: { user: invalid_user_params }
-          expect(response.status).to eq(422)
-          error_response = JSON.parse(response.body)["errors"]
-          expect(error_response["email"]).to include("can't be blank")
-        end
+    context "when the parameters are valid" do
+      it "creates a user" do 
+        post :create, format: :json, params: { user: user_params }
+        expect(response.status).to eq(201)
+        user_response = JSON.parse(response.body)["user"]
+        expect(user_response["first_name"]).to eq(user_params[:first_name])
+        expect(user_response["location"]).to eq(user_params[:location])
+        expect(user_response["guidances"]).to eq(user_params[:guidances])
       end
     end
 
+    context "when the parameters are not valid" do
+      it "does not create a user" do 
+        post :create, format: :json, params: { user: invalid_user_params }
+        expect(response.status).to eq(422)
+        error_response = JSON.parse(response.body)["errors"]
+        expect(error_response["email"]).to include("can't be blank")
+      end
+    end
+  end
+  
   describe "PUT /users/:id" do
     let(:user_params) { attributes_for(:user).merge(email: "testing@gmail.com") }
     let(:invalid_user_params) { attributes_for(:user).merge(email: nil) }
