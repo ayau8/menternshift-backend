@@ -1,0 +1,7 @@
+# This file controls who is tagged for review for any given pull request.
+
+# These owners will be the default initial owners for everything in the repo.
+
+* @Roveri91 @srollins01 @ayau8
+
+
