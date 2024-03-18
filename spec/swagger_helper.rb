@@ -21,10 +21,61 @@ RSpec.configure do |config|
         title: 'Menternshift API V1',
         version: 'v1'
       },
+      components: {
+        schemas: {
+          user: {
+            type: :object,
+            properties: {
+              email: { type: :string },
+              encrypted_password: { type: :string },
+              reset_password_token: { type: :string },
+              reset_password_sent_at: { type: :string, format: :datetime },
+              remember_created_at: { type: :string, format: :datetime },
+              created_at: { type: :string, format: :datetime },
+              updated_at: { type: :string, format: :datetime },
+              role: { type: :string },
+              first_name: { type: :string },
+              last_name: { type: :string },
+              username: { type: :string },
+              location: { type: :string },
+              company: { type: :string },
+              job_title: { type: :string },
+              profile_img: { type: :string, format: :text},
+              bio: { type: :string, format: :text },
+              guidances: {
+                type: :array,
+                items: {
+                  type: :string,
+                  format: :text
+                }
+              },
+              languages: {
+                type: :array,
+                items: {
+                  type: :string,
+                  format: :text
+                }
+              },
+              skills: {
+                type: :array,
+                items: {
+                  type: :string,
+                  format: :text
+                }
+              },
+              is_available: { type: :boolean },
+              timezone: { type: :string },
+              social_platforms: { type: :string, format: :hstore },
+              project_area_id: { type: :integer }
+            },
+            required: %w[email encrypted_password created_at updated_at]
+          }
+        }
+      },
       paths: {},
       servers: [
         {
-          url: 'https://localhost:3000/',
+          url: 'http://localhost:3000/',
           variables: {
             defaultHost: {
               default: 'localhost:3000'

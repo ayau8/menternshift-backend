@@ -2,7 +2,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   let(:users) { create_list(:user, 10) }
   let(:user_id) { users.last.id }
   let(:expertises) { create_list(:expertise, 3, user_id: user_id) }
-  
+
   describe "GET /users" do
     context "when users exist" do
       before { users }
@@ -14,7 +14,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(users_response.size).to eq(10)
       end
     end
-    
+
     context "when users do not exist" do
       let(:users) { [] }
       it "returns an empty array with a 404" do
@@ -25,11 +25,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
   end
-  
+
   describe "GET /users/:id" do
     context "when a user exists" do
       before { expertises }
-      it "returns a specific user" do     
+      it "returns a specific user" do
         get :show, format: :json, params: { id: user_id }
         expect(response.status).to eq(200)
         user_response = JSON.parse(response.body)
@@ -52,14 +52,14 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(error_response["error"]).to eq("User not found")
       end
     end
-  end 
+  end
 
-  describe "POST /users" do 
+  describe "POST /users" do
     let(:user_params) { attributes_for(:user) }
     let(:invalid_user_params) { attributes_for(:user).merge(email: nil) }
-    
+
     context "when the parameters are valid" do
-      it "creates a user" do 
+      it "creates a user" do
         post :create, format: :json, params: { user: user_params }
         expect(response.status).to eq(201)
         user_response = JSON.parse(response.body)["user"]
@@ -70,7 +70,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     context "when the parameters are not valid" do
-      it "does not create a user" do 
+      it "does not create a user" do
         post :create, format: :json, params: { user: invalid_user_params }
         expect(response.status).to eq(422)
         error_response = JSON.parse(response.body)["errors"]
@@ -78,12 +78,12 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
   end
-  
+
   describe "PUT /users/:id" do
     let(:user_params) { attributes_for(:user).merge(email: "testing@gmail.com") }
     let(:invalid_user_params) { attributes_for(:user).merge(email: nil) }
 
-    context "when updating an existing user with valid parameters" do 
+    context "when updating an existing user with valid parameters" do
       it "updates the record of a user" do
         put :update, format: :json, params: { id: user_id, user: user_params }
         expect(response.status).to eq(200)
@@ -92,7 +92,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
 
-    context "when updating an existing user with invalid parameters" do 
+    context "when updating an existing user with invalid parameters" do
       it "does not update the record of a user" do
         put :update, format: :json, params: { id: user_id, user: invalid_user_params }
         expect(response.status).to eq(422)
@@ -100,7 +100,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(error_response["email"]).to include("can't be blank")
       end
     end
-  end 
+  end
 
   describe "DESTROY /users/:id" do
     context "when the specific user exists" do
