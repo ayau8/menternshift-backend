@@ -30,14 +30,7 @@ RSpec.describe 'api/v1/expertises', type: :request do
       response(201, 'Successful') do
         let(:user_id) { '123' }
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
-          type: :object,
-          properties: {
-            domain: { type: :string },
-            years_of_experience: { type: :integer }
-          }
-        }
-
+        parameter name: :user, in: :body, schema: { '$ref' => '#/components/schemas/expertise' }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -85,13 +78,7 @@ RSpec.describe 'api/v1/expertises', type: :request do
         let(:user_id) { '123' }
         let(:id) { '123' }
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
-          type: :object,
-          properties: {
-            domain: { type: :string },
-            years_of_experience: { type: :integer }
-          }
-        }
+        parameter name: :user, in: :body, schema: { '$ref' => '#/components/schemas/expertise' }
 
         after do |example|
           example.metadata[:response][:content] = {

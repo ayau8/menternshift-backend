@@ -75,6 +75,25 @@ components:
       - encrypted_password
       - created_at
       - updated_at
+    expertise:
+      type: object
+      properties:
+        domain:
+          type: string
+        years_of_experience:
+          type: integer
+        user_id:
+          type: integer
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+      required:
+      - user_id
+      - created_at
+      - updated_at
 paths:
   "/api/v1/users/{user_id}/expertises":
     parameters:
@@ -107,12 +126,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                domain:
-                  type: string
-                years_of_experience:
-                  type: integer
+              "$ref": "#/components/schemas/expertise"
   "/api/v1/users/{user_id}/expertises/{id}":
     parameters:
     - name: user_id
@@ -150,12 +164,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                domain:
-                  type: string
-                years_of_experience:
-                  type: integer
+              "$ref": "#/components/schemas/expertise"
     delete:
       summary: Deletes the user's expertise
       tags:

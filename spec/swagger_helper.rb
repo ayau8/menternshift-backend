@@ -69,6 +69,17 @@ RSpec.configure do |config|
               project_area_id: { type: :integer }
             },
             required: %w[email encrypted_password created_at updated_at]
+          },
+          expertise: {
+            type: :object,
+            properties: {
+              domain: { type: :string },
+              years_of_experience: { type: :integer },
+              user_id: { type: :integer },
+              created_at: { type: :string, format: :datetime },
+              updated_at: { type: :string, format: :datetime }
+            },
+            required: %w[user_id created_at updated_at]
           }
         }
       },
