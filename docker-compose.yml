@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  postgresql:
+    image: 'postgres:latest'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      DB_HOST: postgresql
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USERNAME: postgres
+    ports:
+      - "5432:5432"
+
+  rails:
+    environment:
+      EDITOR: "vi"
+      RAILS_ENV: development
+      DB_HOST: postgresql
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USERNAME: postgres
+    build: ./
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/docker/app # add our local code to dockerfile
+    depends_on:
+      - postgresql  # add all dependant container
+
+volumes:
+  postgres: # named volume
