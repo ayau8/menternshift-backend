@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :reviews
   has_many :experiences
-  has_many :expertises
+  has_many :expertises, dependent: :destroy
   has_many :projects
   belongs_to :project_area, optional: true
+
 end
