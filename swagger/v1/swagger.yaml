@@ -176,7 +176,7 @@ paths:
           description: Expertise not found
   "/api/v1/users":
     get:
-      summary: Returns all users
+      summary: Returns a list of users
       tags:
       - Users
       responses:
@@ -217,7 +217,7 @@ paths:
         '404':
           description: User not found
     put:
-      summary: Updates the record of the user
+      summary: Updates the record of a user
       tags:
       - Users
       parameters: []
@@ -232,11 +232,11 @@ paths:
             schema:
               "$ref": "#/components/schemas/user"
     delete:
-      summary: Deletes the user
+      summary: Deletes a user
       tags:
       - Users
       responses:
-        '200':
+        '204':
           description: Successful
         '404':
           description: User not found

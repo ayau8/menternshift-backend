@@ -10,6 +10,7 @@ Rswag::Ui.configure do |c|
 
   c.swagger_endpoint '/api-docs/v1/swagger.yaml', 'API V1 Docs'
   c.config_object['defaultModelsExpandDepth'] = 4
+  c.config_object['validatorUrl'] = 'none'
 
   # Add Basic Auth in case your API is private
   # c.basic_auth_enabled = true

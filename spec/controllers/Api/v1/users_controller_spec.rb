@@ -112,7 +112,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
 
-    context "when the specifc user does not exist" do
+    context "when the specific user does not exist" do
       it "returns a 404 for missing user" do
         delete :destroy, format: :json, params: { id: 0 }
         expect(response.status).to eq(404)

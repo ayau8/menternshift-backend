@@ -4,7 +4,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
   path '/api/v1/users' do
 
-    get('Returns all users') do
+    get('Returns a list of users') do
       tags 'Users'
       response(200, 'Successful') do
 
@@ -68,7 +68,7 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    put('Updates the record of the user') do
+    put('Updates the record of a user') do
       tags 'Users'
       response(200, 'Successful') do
         let(:id) { '123' }
@@ -90,9 +90,9 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    delete('Deletes the user') do
+    delete('Deletes a user') do
       tags 'Users'
-      response(200, 'Successful') do
+      response(204, 'Successful') do
         let(:id) { '123' }
 
         after do |example|

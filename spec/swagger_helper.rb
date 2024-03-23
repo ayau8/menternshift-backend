@@ -40,7 +40,7 @@ RSpec.configure do |config|
               location: { type: :string },
               company: { type: :string },
               job_title: { type: :string },
-              profile_img: { type: :string, format: :text},
+              profile_img: { type: :string, format: :text },
               bio: { type: :string, format: :text },
               guidances: {
                 type: :array,
