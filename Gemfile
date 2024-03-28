@@ -50,6 +50,8 @@ group :development do
   # gem "spring"
 end
 
+gem 'rswag'
+
 gem 'rubocop', '~> 1.58', require: false
 
 gem 'brakeman'

@@ -1,0 +1,247 @@
+---
+openapi: 3.0.1
+info:
+  title: Menternshift API V1
+  version: v1
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        email:
+          type: string
+        encrypted_password:
+          type: string
+        reset_password_token:
+          type: string
+        reset_password_sent_at:
+          type: string
+          format: datetime
+        remember_created_at:
+          type: string
+          format: datetime
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+        role:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        location:
+          type: string
+        company:
+          type: string
+        job_title:
+          type: string
+        profile_img:
+          type: string
+          format: text
+        bio:
+          type: string
+          format: text
+        guidances:
+          type: array
+          items:
+            type: string
+            format: text
+        languages:
+          type: array
+          items:
+            type: string
+            format: text
+        skills:
+          type: array
+          items:
+            type: string
+            format: text
+        is_available:
+          type: boolean
+        timezone:
+          type: string
+        social_platforms:
+          type: string
+          format: hstore
+        project_area_id:
+          type: integer
+      required:
+      - email
+      - encrypted_password
+      - created_at
+      - updated_at
+    expertise:
+      type: object
+      properties:
+        domain:
+          type: string
+        years_of_experience:
+          type: integer
+        user_id:
+          type: integer
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+      required:
+      - user_id
+      - created_at
+      - updated_at
+paths:
+  "/api/v1/users/{user_id}/expertises":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID of user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns the user's expertises
+      tags:
+      - Expertises
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Expertises not found
+    post:
+      summary: Creates the user's expertise
+      tags:
+      - Expertises
+      parameters: []
+      responses:
+        '201':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/expertise"
+  "/api/v1/users/{user_id}/expertises/{id}":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID of the user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: ID of the expertise that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns the user's expertise
+      tags:
+      - Expertises
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Expertise not found
+    put:
+      summary: Updates the record of the user's expertise
+      tags:
+      - Expertises
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/expertise"
+    delete:
+      summary: Deletes the user's expertise
+      tags:
+      - Expertises
+      responses:
+        '204':
+          description: Successful
+        '404':
+          description: Expertise not found
+  "/api/v1/users":
+    get:
+      summary: Returns a list of users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Users not found
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/user"
+  "/api/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID of the user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns a specific user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: User not found
+    put:
+      summary: Updates the record of a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/user"
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      responses:
+        '204':
+          description: Successful
+        '404':
+          description: User not found
+servers:
+- url: http://localhost:3000/
+  variables:
+    defaultHost:
+      default: localhost:3000
