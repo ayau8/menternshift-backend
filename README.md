@@ -21,6 +21,9 @@ Things you may want to cover:
 
 * Deployment instructions
 
+* MenternShift API Documentation (OpenAPI Specification 3.1.0.)
+https://bump.sh/menternshift/doc/menternshift
+
 * Running Docker Container
 
   Make sure you have Docker up and running on your machine. If you haven't installed Docker yet, please refer to the official [Docker documentation](https://docs.docker.com/get-docker/) for installation instructions.
