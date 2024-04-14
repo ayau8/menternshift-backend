@@ -1,9 +1,9 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :update, :destroy]
   
   def index
     @users = User.all
-
     render json: 
       @users.present? ? @users : { error: "Users not found" },
       status: @users.present? ? :ok : :not_found
