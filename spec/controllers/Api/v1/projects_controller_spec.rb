@@ -43,8 +43,8 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
       end
     end
 
-      context "when project does not exist" do
-        it "returns a 404 for missing project" do
+    context "when project does not exist" do
+      it "returns a 404 for missing project" do
         get :show, format: :json, params: { user_id: user.id, id: 0 }
         expect(response.status).to eq(404)
         error_response = JSON.parse(response.body)
