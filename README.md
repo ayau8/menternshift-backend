@@ -50,6 +50,11 @@ https://bump.sh/menternshift/doc/menternshift
     docker-compose run rails bin/rails db:migrate
     ```
 
+  5. Seed the database:
+    ```bash
+    docker-compose run rails bin/rails db:seed
+    ```
+
   These commands will set up your Docker environment and prepare your Rails application for use.
 
 
