@@ -61,3 +61,5 @@ gem "devise", "~> 4.9"
 gem 'factory_bot_rails'
 
 gem 'faker'
+
+gem 'pg_search'
