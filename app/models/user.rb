@@ -10,4 +10,10 @@ class User < ApplicationRecord
   has_many :projects
   belongs_to :project_area, optional: true
 
+  include PgSearch::Model
+  pg_search_scope :search_user,
+    against: [ :first_name, :middle_name, :last_name, :languages ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end
