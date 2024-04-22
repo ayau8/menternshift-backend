@@ -4,12 +4,12 @@ class Api::V1::ExperiencesController < ApplicationController
   def index
     @experiences = Experience.where(user_id: params[:user_id])
 
-    render json: @experiences.present? ? @experiences : { error: "experiences not found" },
+    render json: @experiences.present? ? @experiences : { error: "Experiences not found" },
            status: @experiences.present? ? :ok : :not_found
   end
 
   def show
-    render json: @experience || { error: "experience not found" },
+    render json: @experience || { error: "Experience not found" },
            status: @experience ? :ok : :not_found
   end
 
@@ -39,7 +39,7 @@ class Api::V1::ExperiencesController < ApplicationController
 
   def destroy
     render json:
-      @experience ? @experience.destroy : { error: "experience not found" },
+      @experience ? @experience.destroy : { error: "Experience not found" },
       status: @experience ? :no_content : :not_found
   end
 
