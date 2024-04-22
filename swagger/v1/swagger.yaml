@@ -94,7 +94,114 @@ components:
       - user_id
       - created_at
       - updated_at
+    experience:
+      type: object
+      properties:
+        company:
+          type: string
+        job_title:
+          type: string
+        description:
+          type: string
+          format: text
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        user_id:
+          type: integer
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+      required:
+      - user_id
+      - created_at
+      - updated_at
 paths:
+  "/api/v1/users/{user_id}/experiences":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID of user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns the user's experiences
+      tags:
+      - Experiences
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Experiences not found
+    post:
+      summary: Creates the user's experience
+      tags:
+      - Experiences
+      parameters: []
+      responses:
+        '201':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/experience"
+  "/api/v1/users/{user_id}/experiences/{id}":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID of the user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: ID of the experience that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns the user's experience
+      tags:
+      - Experiences
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Experience not found
+    put:
+      summary: Updates the record of the user's experience
+      tags:
+      - Experiences
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/experience"
+    delete:
+      summary: Deletes the user's experience
+      tags:
+      - Experiences
+      responses:
+        '204':
+          description: Successful
+        '404':
+          description: Experience not found
   "/api/v1/users/{user_id}/expertises":
     parameters:
     - name: user_id

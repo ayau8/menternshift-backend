@@ -4,6 +4,7 @@ puts "Clearing DB"
 
 #Destroying the database
 Expertise.destroy_all
+Experience.destroy_all
 User.destroy_all
 
 #Creating the users
@@ -28,14 +29,14 @@ puts "--------------------------------------"
   bio: "Hello, My name is Alvin Yau",
   profile_img: "https://media.istockphoto.com/id/1142003972/photo/side-portrait-of-laughing-african-american-man-looking-up.jpg?s=612x612&w=0&k=20&c=fCiBfXI-PIdPACKbH3RdnYxq8ee5MZAhXKQN3I17j1Q=",
   guidances: [
-    "Interview Coaching", 
-    "Skill Development", 
+    "Interview Coaching",
+    "Skill Development",
     "Personal Development"
   ],
   languages: [
-    "English", 
-    "Japanese", 
-    "Cantonese", 
+    "English",
+    "Japanese",
+    "Cantonese",
     "Mandarin"
   ],
   skills: [],
@@ -55,5 +56,17 @@ puts "--------------------------------------"
 Expertise.create!(
   domain: "Product Design",
   years_of_experience: 5,
+  user_id: first_user.id,
+)
+
+puts "Creating Experience"
+puts "--------------------------------------"
+#Experience
+Experience.create!(
+  company: "Tech Inc.",
+  job_title: "Full-Stack Developer",
+  description: "Developed e-commerce sites for several clients.",
+  start_date: Date.new(2023,1,1),
+  end_date: Date.new(2024,1,1)
   user_id: first_user.id,
 )

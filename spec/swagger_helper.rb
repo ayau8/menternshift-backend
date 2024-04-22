@@ -80,6 +80,20 @@ RSpec.configure do |config|
               updated_at: { type: :string, format: :datetime }
             },
             required: %w[user_id created_at updated_at]
+          },
+          experience: {
+            type: :object,
+            properties: {
+              company: { type: :string },
+              job_title: { type: :string },
+              description: { type: :string, format: :text },
+              start_date: { type: :string, format: :date },
+              end_date: { type: :string, format: :date },
+              user_id: { type: :integer },
+              created_at: { type: :string, format: :datetime },
+              updated_at: { type: :string, format: :datetime }
+            },
+            required: %w[user_id created_at updated_at]
           }
         }
       },
