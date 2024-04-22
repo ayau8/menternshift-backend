@@ -35,8 +35,8 @@ RSpec.describe Api::V1::ExperiencesController, type: :controller do
         expect(experience_response["company"]).to eq(experiences.last.company)
         expect(experience_response["job_title"]).to eq(experiences.last.job_title)
         expect(experience_response["description"]).to eq(experiences.last.description)
-        expect(experience_response["start_date"]).to eq(experiences.last.start_date)
-        expect(experience_response["end_date"]).to eq(experiences.last.end_date)
+        expect(experience_response["start_date"].to_s).to eq(experiences.last.start_date.to_s)
+        expect(experience_response["end_date"].to_s).to eq(experiences.last.end_date.to_s)
       end
     end
 
@@ -62,8 +62,8 @@ RSpec.describe Api::V1::ExperiencesController, type: :controller do
         expect(create_experience['company']).to eq(experience_params[:company])
         expect(create_experience['job_title']).to eq(experience_params[:job_title])
         expect(create_experience['description']).to eq(experience_params[:description])
-        expect(create_experience['start_date']).to eq(experience_params[:start_date])
-        expect(create_experience['end_date']).to eq(experience_params[:end_date])
+        expect(create_experience['start_date'].to_s).to eq(experience_params[:start_date].to_s)
+        expect(create_experience['end_date'].to_s).to eq(experience_params[:end_date].to_s)
       end
     end
 
@@ -86,7 +86,7 @@ RSpec.describe Api::V1::ExperiencesController, type: :controller do
       put :update, format: :json, params: { user_id: user.id, id: experience_id, experience: experience_params }
       expect(response.status).to eq(200)
       updated_response = JSON.parse(response.body)['experience']
-      expect(updated_response['company']).to eq (experience_params[:company])
+      expect(updated_response['company']).to eq(experience_params[:company])
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe Api::V1::ExperiencesController, type: :controller do
       put :update, format: :json, params: { user_id: user.id, id: experience_id, experience: invalid_experience_params }
       expect(response.status).to eq(422)
       error_response = JSON.parse(response.body)['errors']
-      expect(error_response['company']).to include ("can't be blank")
+      expect(error_response['company']).to include("can't be blank")
       end
     end
   end
