@@ -35,10 +35,10 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
         expect(project_response["name"]).to eq(projects.last.name)
         expect(project_response["description"]).to eq(projects.last.description)
         expect(project_response["image_url"]).to eq(projects.last.image_url)
-        expect(project_response["start_date"]).to eq(projects.last.start_date)
-        expect(project_response["end_date"]).to eq(projects.last.end_date)
+        expect(project_response["start_date"].to_s).to eq(projects.last.start_date.to_s)
+        expect(project_response["end_date"].to_s).to eq(projects.last.end_date.to_s)
         expect(project_response["duration"]).to eq(projects.last.duration)
-        expect(project_response["progress"]).to eq(projects.last.progess)
+        expect(project_response["progress"]).to eq(projects.last.progress)
         expect(project_response["skills"]).to eq(projects.last.skills)
       end
     end
@@ -65,8 +65,8 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
         expect(create_project['name']).to eq(project_params[:name])
         expect(create_project['description']).to eq(project_params[:description])
         expect(create_project['image_url']).to eq(project_params[:image_url])
-        expect(create_project['start_date']).to eq(project_params[:start_date])
-        expect(create_project['end_date']).to eq(project_params[:end_date])
+        expect(create_project['start_date'].to_s).to eq(project_params[:start_date].to_s)
+        expect(create_project['end_date'].to_s).to eq(project_params[:end_date].to_s)
         expect(create_project['duration']).to eq(project_params[:duration])
         expect(create_project['progress']).to eq(project_params[:progress])
         expect(create_project['skills']).to eq(project_params[:skills])
@@ -78,7 +78,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
         post :create, format: :json, params: { user_id: user.id, project: invalid_project_params }
         expect(response.status).to eq(422)
         error_response = JSON.parse(response.body)['errors']
-        expect(error_response['domain']).to include("can't be blank")
+        expect(error_response['name']).to include("can't be blank")
       end
     end
   end
@@ -101,7 +101,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
       put :update, format: :json, params: { user_id: user.id, id: project_id, project: invalid_project_params }
       expect(response.status).to eq(422)
       error_response = JSON.parse(response.body)['errors']
-      expect(error_response['domain']).to include("can't be blank")
+      expect(error_response['name']).to include("can't be blank")
       end
     end
   end
