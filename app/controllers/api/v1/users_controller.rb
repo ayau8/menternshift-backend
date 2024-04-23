@@ -4,15 +4,13 @@ class Api::V1::UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json:
-      @users.present? ? @users : { error: "Users not found" },
-      status: @users.present? ? :ok : :not_found
+    render json: @users.present? ? @users : { error: "Users not found" },
+           status: @users.present? ? :ok : :not_found
   end
 
   def show
-    render json:
-      @user ? @user : { error: "User not found" },
-      status: @user ? :ok : :not_found
+    render json: @user || { error: "User not found" },
+           status: @user ? :ok : :not_found
   end
 
   def new
@@ -38,9 +36,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    render json:
-      @user ? @user.destroy : { error: "User not found" },
-      status: @user ? :no_content : :not_found
+    render json: @user ? @user.destroy : { error: "User not found" },
+           status: @user ? :no_content : :not_found
   end
 
   private

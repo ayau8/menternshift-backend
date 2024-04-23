@@ -4,15 +4,13 @@ class Api::V1::ExpertisesController < ApplicationController
   def index
     @expertises = Expertise.where(user_id: params[:user_id])
 
-    render json:
-      @expertises.present? ? @expertises : { error: "Expertises not found" },
-      status: @expertises.present? ? :ok : :not_found
+    render json: @expertises.present? ? @expertises : { error: "Expertises not found" },
+           status: @expertises.present? ? :ok : :not_found
   end
 
   def show
-    render json:
-      @expertise ? @expertise : { error: "Expertise not found" },
-      status: @expertise ? :ok : :not_found
+    render json: @expertise || { error: "Expertise not found" },
+           status: @expertise ? :ok : :not_found
   end
 
   def new
@@ -40,9 +38,8 @@ class Api::V1::ExpertisesController < ApplicationController
   end
 
   def destroy
-    render json:
-      @expertise ? @expertise.destroy : { error: "Expertise not found" },
-      status: @expertise ? :no_content : :not_found
+    render json: @expertise ? @expertise.destroy : { error: "Expertise not found" },
+           status: @expertise ? :no_content : :not_found
   end
 
   private
