@@ -1,16 +1,16 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
-  
+  before_action :set_user, only: %i[show update destroy]
+
   def index
     @users = User.all
 
-    render json: 
+    render json:
       @users.present? ? @users : { error: "Users not found" },
       status: @users.present? ? :ok : :not_found
   end
 
   def show
-    render json: 
+    render json:
       @user ? @user : { error: "User not found" },
       status: @user ? :ok : :not_found
   end
@@ -37,7 +37,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     render json:
       @user ? @user.destroy : { error: "User not found" },
       status: @user ? :no_content : :not_found
@@ -51,6 +51,5 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :role, :first_name, :middle_name, :last_name, :username, :location, :company, :job_title, :bio, :is_available, :timezone, :social_platforms, :profile_img, :password, guidances: [], languages: [], skills: [])
-  end  
+  end
 end
-

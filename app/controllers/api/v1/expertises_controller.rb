@@ -1,10 +1,10 @@
 class Api::V1::ExpertisesController < ApplicationController
-  before_action :set_expertise, only: [:show, :update, :destroy]
-  
+  before_action :set_expertise, only: %i[show update destroy]
+
   def index
     @expertises = Expertise.where(user_id: params[:user_id])
-    
-    render json: 
+
+    render json:
       @expertises.present? ? @expertises : { error: "Expertises not found" },
       status: @expertises.present? ? :ok : :not_found
   end
@@ -36,7 +36,7 @@ class Api::V1::ExpertisesController < ApplicationController
       render json: { expertise: @expertise }, status: :ok
     else
       render json: { errors: @expertise.errors }, status: :unprocessable_entity
-    end 
+    end
   end
 
   def destroy
@@ -53,6 +53,5 @@ class Api::V1::ExpertisesController < ApplicationController
 
   def expertise_params
     params.require(:expertise).permit(:domain, :years_of_experience)
-  end  
+  end
 end
-

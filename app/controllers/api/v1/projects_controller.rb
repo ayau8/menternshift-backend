@@ -49,7 +49,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :image_url, :start_date, :end_date, :duration,
-                                    :progress, :skills)
+    params.require(:project).permit(:name, :description, :image_url, :start_date, :end_date, :duration, :progress, skills: [])
   end
 end
