@@ -94,6 +94,44 @@ components:
       - user_id
       - created_at
       - updated_at
+    project:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          format: text
+        image_url:
+          type: string
+          format: text
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        duration:
+          type: integer
+        progress:
+          type: string
+        skills:
+          type: array
+          items:
+            type: string
+            format: text
+        user_id:
+          type: integer
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+      required:
+      - user_id
+      - created_at
+      - updated_at
 paths:
   "/api/v1/users/{user_id}/expertises":
     parameters:
@@ -174,6 +212,85 @@ paths:
           description: Successful
         '404':
           description: Expertise not found
+  "/api/v1/users/{user_id}/projects":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID of user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns the user's projects
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Projects not found
+    post:
+      summary: Creates the user's project
+      tags:
+      - Projects
+      parameters: []
+      responses:
+        '201':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/project"
+  "/api/v1/users/{user_id}/projects/{id}":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID of the user that needs to be fetched
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: ID of the project that needs to be fetched
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Returns the user's project
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Project not found
+    put:
+      summary: Updates the record of the user's project
+      tags:
+      - Projects
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+        '422':
+          description: Can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/project"
+    delete:
+      summary: Deletes the user's project
+      tags:
+      - Projects
+      responses:
+        '204':
+          description: Successful
+        '404':
+          description: Project not found
   "/api/v1/users":
     get:
       summary: Returns a list of users

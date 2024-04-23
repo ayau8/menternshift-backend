@@ -80,6 +80,29 @@ RSpec.configure do |config|
               updated_at: { type: :string, format: :datetime }
             },
             required: %w[user_id created_at updated_at]
+          },
+          project: {
+            type: :object,
+            properties: {
+              name: { type: :string },
+              description: { type: :string, format: :text },
+              image_url: { type: :string, format: :text },
+              start_date: { type: :string, format: :date },
+              end_date: { type: :string, format: :date },
+              duration: { type: :integer },
+              progress: { type: :string },
+              skills: {
+                type: :array,
+                items: {
+                  type: :string,
+                  format: :text
+                }
+              },
+              user_id: { type: :integer },
+              created_at: { type: :string, format: :datetime },
+              updated_at: { type: :string, format: :datetime }
+            },
+            required: %w[user_id created_at updated_at]
           }
         }
       },
