@@ -1,9 +1,9 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:create]
   before_action :set_user, only: [:show, :update, :destroy]
   
   def index
     @users = User.all
-
     render json: 
       @users.present? ? @users : { error: "Users not found" },
       status: @users.present? ? :ok : :not_found
@@ -44,7 +44,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
-
+  
   def set_user
     @user = User.includes(:expertises).find_by(id: params[:id])
   end

@@ -1,27 +1,32 @@
+require 'devise/jwt/test_helpers'
+
 RSpec.describe Api::V1::UsersController, type: :controller do
+  include Devise::Test::ControllerHelpers 
+  include Devise::JWT::TestHelpers
+  
   let(:users) { create_list(:user, 10) }
   let(:user_id) { users.last.id }
   let(:expertises) { create_list(:expertise, 3, user_id: user_id) }
+  
+  before do
+    request.headers['Accept'] = 'application/json'
+    request.headers['Content-Type'] = 'application/json'
+    if users.any?
+      user = users.last
+      auth_headers = Devise::JWT::TestHelpers.auth_headers({}, user)
+      request.headers.merge!(auth_headers)
+    end
+  end
 
   describe "GET /users" do
+    before { users }
     context "when users exist" do
-      before { users }
-      it "returns a list of users" do
+      it "returns a list of users" do        
         get :index, format: :json
         expect(response.status).to eq(200)
         users_response = JSON.parse(response.body)
         expect(users_response).not_to be_empty
         expect(users_response.size).to eq(10)
-      end
-    end
-
-    context "when users do not exist" do
-      let(:users) { [] }
-      it "returns an empty array with a 404" do
-        get :index, format: :json
-        expect(response.status).to eq(404)
-        error_response = JSON.parse(response.body)
-        expect(error_response["error"]).to eq("Users not found")
       end
     end
   end

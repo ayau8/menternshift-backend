@@ -1,4 +1,5 @@
 require 'faker'
+require 'securerandom'
 
 FactoryBot.define do
   factory :user do
@@ -25,5 +26,6 @@ FactoryBot.define do
       "Instagram" => "https://www.instagram.com/",
       "Portfolio" => "https://www.wix.com/blog/best-portfolio-websites/"
     }}
+    jti { SecureRandom.uuid }
   end
 end
