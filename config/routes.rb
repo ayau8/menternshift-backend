@@ -12,10 +12,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-    namespace :api do
-       namespace :v1 do
-        resources :users do
-          resources :expertises
+  namespace :api do
+    namespace :v1 do
+      resources :users do
+        resources :expertises
       end
     end
   end
