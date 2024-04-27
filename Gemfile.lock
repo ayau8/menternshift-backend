@@ -140,6 +140,9 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.4)
@@ -248,8 +251,9 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  arm64-darwin
   arm64-darwin-22
-  arm64-darwin-23x
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
@@ -259,6 +263,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   pg (~> 1.1)
+  pg_search
   puma (~> 5.0)
   rails (~> 7.0.8)
   rspec-rails
