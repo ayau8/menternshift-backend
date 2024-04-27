@@ -13,6 +13,9 @@ class User < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_user,
     against: [ :first_name, :middle_name, :last_name, :username, :location, :company, :job_title, :guidances, :languages, :skills ],
+    associated_against: {
+    expertises: [ :domain ]
+    },
     using: {
       tsearch: { prefix: true }
     }
